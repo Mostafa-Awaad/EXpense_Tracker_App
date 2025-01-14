@@ -2,10 +2,6 @@ import 'package:flutter/material.dart';
 
 var _enteredTitle = '';
 
-void _inputTitle(String inputValue) {
-  _enteredTitle = inputValue;
-}
-
 class NewExpense extends StatefulWidget {
   const NewExpense({super.key});
   @override
@@ -15,24 +11,47 @@ class NewExpense extends StatefulWidget {
 }
 
 class _NewExpenseState extends State<NewExpense> {
+  final _titleController = TextEditingController();
+  final _amountController = TextEditingController();
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    _titleController.dispose();
+    _amountController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(16),
       child: Column(
         children: [
-          const TextField(
-            onChanged: _inputTitle,
+          TextField(
+            controller: _titleController,
             maxLength: 50,
-            decoration: InputDecoration(
-              hintText: "Title",
+            decoration: const InputDecoration(
+              label: Text('Title'),
+            ),
+          ),
+          TextField(
+            controller: _amountController,
+            keyboardType: TextInputType.number,
+            decoration: const InputDecoration(
+              prefixText: '\$ ',
+              label: Text('Amount'),
             ),
           ),
           Row(
             children: [
+              TextButton(
+                onPressed: () {},
+                child: Text("Cancel"),
+              ),
               ElevatedButton(
                 onPressed: () {
-                  print(_enteredTitle);
+                  print(_titleController.text);
+                  print(_amountController);
                 },
                 child: Text("Save Expense"),
               ),
