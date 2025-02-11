@@ -65,6 +65,8 @@ class _NewExpenseState extends State<NewExpense> {
         amount: _enteredAmount,
         date: _selectedDate!,
         category: _selectedCategory));
+    // Make the overlay closes automatically after adding a new expense
+    Navigator.pop(context);
   }
 
   // dispose method is from the stateful widget methods that is called when the widget is
@@ -81,7 +83,7 @@ class _NewExpenseState extends State<NewExpense> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.fromLTRB(16, 48, 16, 16),
       child: Column(
         children: [
           TextField(

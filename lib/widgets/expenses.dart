@@ -27,20 +27,74 @@ class _ExpensesState extends State<Expenses> {
       category: Category.leisure,
     ),
   ];
-  void _openAddExpenseOverlay(){
+  void _openAddExpenseOverlay() {
     showModalBottomSheet(
-      context: context, 
+      isScrollControlled: true,
+      context: context,
       builder: (ctx) => NewExpense(onAddExpense: _addNewExpense),
-      );
+    );
   }
-  //Function to add new expense
-  void _addNewExpense(Expense expense){
-    setState((){
+
+  //Function to add new expense item
+  void _addNewExpense(Expense expense) {
+    setState(() {
       _registeredExpenses.add(expense);
     });
   }
+
+  //Function to remove an expense item
+  void _removeExpense(Expense expense) {
+    final _expenseIndex = _registeredExpenses.indexOf(expense);
+    setState(() {
+      _registeredExpenses.remove(expense);
+    });
+    // Clear all snack bars before showing a new one
+    ScaffoldMessenger.of(context).clearSnackBars();
+    // Show snack bar message to undo the removing action
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        duration: const Duration(seconds: 3), // duration of the message
+        content: const Text(
+          // message content
+          "Expense removed",
+        ),
+        action: SnackBarAction(
+          label: "Undo",
+          onPressed: () {
+            // Using the insert method to add the removed expense back to its original index position
+            // Contrary to the add method that adds the item to the end of the list
+            setState(() {
+              _registeredExpenses.insert(_expenseIndex, expense);
+            });
+          },
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
+    // Declare a widget that represents the main content
+    Widget mainContent = const Center(
+      child: Text(
+        'No expenses added yet!',
+      ),
+    );
+    if (_registeredExpenses.isNotEmpty) {
+      setState(() {
+        mainContent = Column(
+          children: [
+            const Text('Chart'),
+            Expanded(
+              child: ExpensesList(
+                expenses: _registeredExpenses,
+                onRemoveExpense: _removeExpense,
+              ),
+            ),
+          ],
+        );
+      });
+    }
     return Scaffold(
       appBar: AppBar(
         title: const Text("EXpense Tracker"),
@@ -51,14 +105,7 @@ class _ExpensesState extends State<Expenses> {
           ),
         ],
       ),
-      body: Column(
-        children: [
-          const Text('Chart'),
-          Expanded(
-            child: ExpensesList(expenses: _registeredExpenses),
-          ),
-        ],
-      ),
+      body: mainContent,
     );
   }
 }
