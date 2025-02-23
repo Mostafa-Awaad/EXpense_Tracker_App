@@ -34,7 +34,6 @@ class _ExpensesState extends State<Expenses> {
       builder: (ctx) => NewExpense(onAddExpense: _addNewExpense),
     );
   }
-
   //Function to add new expense item
   void _addNewExpense(Expense expense) {
     setState(() {
