@@ -9,5 +9,5 @@
 - [Widgets used](#widgets-used)
 
 ### Key concepts
-- **Showing snackbar**: It is used inform users when certain actions take place. In our case, it is used to inform the user that an expense deleted by giving the user the option to undo the action.
+- **Showing snackbar**: It is used inform users when certain actions take place. In our case, it is used to inform the user that an expense deleted by giving the user the option to undo the action. It is used in `expenses.dart` file in the `_removeExpense` function 
 - 
