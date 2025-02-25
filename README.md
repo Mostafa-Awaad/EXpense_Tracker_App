@@ -1,16 +1,13 @@
-# expenses_tracker
+# 💲 Expense tracker app:
+## Description:
+- It is an application that allows the user to register their expenses by allowing them to choose the expense category, date of expense, amount, title. It also allows the user to view their expenses in both list and chart formats. The project goes beyound the basic concepts and dives more deeper into dart and flutter features such as adding interactivity, apply global theming to the entire app, using modal overlays & dialogs, handling baisc user inputs, ensuring valid user input, and handling user choice by formatting the date in readable format after allowing the user to pick up a date.
 
-A new Flutter project.
+## Table of contents:
+- [Usage](#usage)
+- [Features](#features)
+- [Key concepts](#key-concepts)
+- [Widgets used](#widgets-used)
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### Key concepts
+- **Showing snackbar**: It is used inform users when certain actions take place. In our case, it is used to inform the user that an expense deleted by giving the user the option to undo the action.
+- 
