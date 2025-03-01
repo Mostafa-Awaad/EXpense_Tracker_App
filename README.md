@@ -48,5 +48,28 @@
          - Checks if the title, amount, date fields are not empty.
          - Shows alert dialog if one of the entered fields is invalid or empty.
          - if the validation passes, a new expenses is added to the list then the dialog closes.
+      
+#### Making the app responsive and adaptive:
+ - Goal:
+     - Changing layouts based on screen sizes.
+     - Detecting and using screen and platform information.
+     - Building adaptive widgets.
+ - Responsive app:
+   - Responsive app is an app where the layout and styling adjusts to the available space to the available width and to the mode in which the app is run, so to portrait or landscape mode.
+   - The problem appears when the screen orientation switches to the landscape mode such that the UI becomes not optimized when the screen rotates.
+   - Solution:
+     - First solution: locking the device orientation using flutter.
+       - ````
+         WidgetsFlutterBinding.ensureInitialized();
+          // Adding then() method because setPreferencesOrientations gives a future
+          // making the runApp inside the body of the anonymous function is to make the UI applied once the device orientation is locked.
+          SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
+              .then((fn) {
+            runApp(
+              MaterialApp( ....
+              ),
+            );
+          });
+  ````
 ---
 
