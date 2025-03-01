@@ -9,6 +9,7 @@
 ### Features 
 - Displays the expenses in both chart and list views.
 - Enables the user to add a new expenses with the ability to enter its title, amount, and choosing its catgory and date of expense.
+- Enables the user to delete expenses.
 ### Key concepts
 - #### Showing snackbar:
   It is used to inform users when certain actions take place. In our case, it is used to inform the user that an expense deleted with giving the user the option to undo the action. It is used in `expenses.dart` file in the `_removeExpense` function.
