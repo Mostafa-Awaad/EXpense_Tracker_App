@@ -49,7 +49,7 @@
          - Shows alert dialog if one of the entered fields is invalid or empty.
          - if the validation passes, a new expenses is added to the list then the dialog closes.
       
-#### Making the app responsive and adaptive:
+- #### Making the app responsive and adaptive:
  - Goal:
      - Changing layouts based on screen sizes.
      - Detecting and using screen and platform information.
@@ -60,6 +60,7 @@
    - Solution:
      - First solution: locking the device orientation using flutter.
        - ````
+         // The following line is to ensure that locking the orientation and running the app work as intended.
          WidgetsFlutterBinding.ensureInitialized();
           // Adding then() method because setPreferencesOrientations gives a future
           // making the runApp inside the body of the anonymous function is to make the UI applied once the device orientation is locked.
