@@ -3,6 +3,7 @@ import 'package:expenses_tracker/widgets/new_expense.dart';
 import 'package:flutter/material.dart';
 import 'package:expenses_tracker/models/expense.dart';
 import 'package:expenses_tracker/widgets/chart/chart.dart';
+
 class Expenses extends StatefulWidget {
   const Expenses({super.key});
   @override
@@ -29,11 +30,14 @@ class _ExpensesState extends State<Expenses> {
   ];
   void _openAddExpenseOverlay() {
     showModalBottomSheet(
+      useSafeArea: true,
       isScrollControlled: true,
+      constraints: const BoxConstraints.expand(),
       context: context,
       builder: (ctx) => NewExpense(onAddExpense: _addNewExpense),
     );
   }
+
   //Function to add new expense item
   void _addNewExpense(Expense expense) {
     setState(() {
@@ -73,6 +77,7 @@ class _ExpensesState extends State<Expenses> {
 
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
     // Declare a widget that represents the main content
     Widget mainContent = const Center(
       child: Text(
@@ -81,17 +86,36 @@ class _ExpensesState extends State<Expenses> {
     );
     if (_registeredExpenses.isNotEmpty) {
       setState(() {
-        mainContent = Column(
-          children: [
-            Chart(expenses: _registeredExpenses),
-            Expanded(
-              child: ExpensesList(
-                expenses: _registeredExpenses,
-                onRemoveExpense: _removeExpense,
-              ),
-            ),
-          ],
-        );
+        mainContent = width < 600
+            ? Column(
+                children: [
+                  Chart(expenses: _registeredExpenses),
+                  Expanded(
+                    child: ExpensesList(
+                      expenses: _registeredExpenses,
+                      onRemoveExpense: _removeExpense,
+                    ),
+                  ),
+                ],
+              )
+            :
+            // Chart widget gets infinity width as it gets width as much it can get
+            Row(
+                children: [
+                  // Expanded constraints in the child (i.e, Chart) to only take as much width as available in the Row after sizing the other Row children
+                  Expanded(
+                    child:
+                        // Chart widget gets infinity width as it gets width as much it can get
+                        Chart(expenses: _registeredExpenses),
+                  ),
+                  Expanded(
+                    child: ExpensesList(
+                      expenses: _registeredExpenses,
+                      onRemoveExpense: _removeExpense,
+                    ),
+                  ),
+                ],
+              );
       });
     }
     return Scaffold(
