@@ -50,27 +50,30 @@
          - if the validation passes, a new expenses is added to the list then the dialog closes.
       
 - #### Making the app responsive and adaptive:
- - Goal:
-     - Changing layouts based on screen sizes.
-     - Detecting and using screen and platform information.
-     - Building adaptive widgets.
- - Responsive app:
-   - Responsive app is an app where the layout and styling adjusts to the available space to the available width and to the mode in which the app is run, so to portrait or landscape mode.
-   - The problem appears when the screen orientation switches to the landscape mode such that the UI becomes not optimized when the screen rotates.
-   - Solution:
-     - First solution: locking the device orientation using flutter.
-       - ````
-         // The following line is to ensure that locking the orientation and running the app work as intended.
-         WidgetsFlutterBinding.ensureInitialized();
-          // Adding then() method because setPreferencesOrientations gives a future
-          // making the runApp inside the body of the anonymous function is to make the UI applied once the device orientation is locked.
-          SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
-              .then((fn) {
-            runApp(
-              MaterialApp( ....
-              ),
-            );
-          });
-  ````
+   - Goal:
+       - Changing layouts based on screen sizes.
+       - Detecting and using screen and platform information.
+       - Building adaptive widgets.
+   - Responsive app:
+     - Responsive app is an app where the layout and styling adjusts to the available space to the available width and to the mode in which the app is run, so to portrait or landscape mode.
+     - The problem appears when the screen orientation switches to the landscape mode such that the UI becomes not optimized when the screen rotates.
+     - Solution:
+       - First solution: locking the device orientation using flutter.
+          ````
+           // The following line is to ensure that locking the orientation and running the app work as intended.
+           WidgetsFlutterBinding.ensureInitialized();
+            // Adding then() method because setPreferencesOrientations gives a future
+            // making the runApp inside the body of the anonymous function is to make the UI applied once the device orientation is locked.
+            SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
+                .then((fn) {
+              runApp(
+                MaterialApp( ....
+                ),
+              );
+            });
+         ````
+
+      - Second solution: building responsive user interfaces by using `MediaQuery` to get the width and the height of the screen in which the UI is presented or by using `LayoutBuilder` to get information about the constraints applied by the parent widget of the widget where you are using the `LayoutBuilder`. The infromation that you get from either `MediaQuery` or `LayoutBuilder`, you could use it to render the UI conditionally based on the current screen orientation.
+    
 ---
 
